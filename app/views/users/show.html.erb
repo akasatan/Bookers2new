@@ -1,0 +1,28 @@
+<%= render 'users/list', user: @user %>
+<%= render 'users/newbook', users: @users %>
+    <div class="col-md-8 offset-md-1">
+        <h2>Books</h2>
+        <table class="table table-hover table-inverse">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Title</th>
+              <th>Opinion</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.zip(@books) do |user,book| %>
+            <tr>
+              <td><%= attachment_image_tag user, :my_image, :fill, 40, 40, fallback: "no_image.jpg" %></td>
+              <td><%= book.title %></td>
+              <td><%= book.setsumei %></td>
+             <% if @user.user == current_user %>
+              <td><%= link_to "Edit", edit_book_path(user) %></td>
+              <td><%= link_to "Destroy", books_path(user) method: :dalete %></td>
+             <% end %>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>

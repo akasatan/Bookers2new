@@ -4,38 +4,62 @@
     <title>Bookers2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <li>
-        <%= link_to "Home", root_path %>
-      </li>
-      <li>
-        <%= link_to "Users本当はUsersに飛ばす", books_path %>
-      </li>
-      <li>
-        <%= link_to "Books", books_path %>
-      </li>
-      <li>
-        <%= link_to "logout", destroy_user_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "Home", root_path %>
-      </li>
-      <li>
-        <%= link_to "About", home_about_path %>
-      </li>
-      <li>
-        <%= link_to "sign up", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "login", new_user_session_path %>
-    <% end %>
+    <header>
+      <nav class="navbar navbar-expend-lg navbar-dark bg-dark">
+      <!--↑のなびばーがメニューを作る定義-->
+      <!--fixed-topを付けて上部固定したいところ-->
+          <a class="navbar-brand" href="/" ><!--brandはbrandロゴ-->
+            <span>Bookers</span>
+          </a>
+           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <!--ハンバーガーメニューの設置-->
+          <!--メニューのIDまで付ける必要ある？省略した方が見やすい？-->
+            <span class="navbar-toggler-icon"></span>
+            <!--↑CSSにてハンバーガーメニューの画像定義する-->
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02" style>
+          <!--buttonのaria-labelとdivのidと同じにする-->
+            <ul class="navber-nav ml auto">
+              <% if user_signed_in? %>
+               <li class="nav-item active">
+                <%= link_to "Home", users_path, class: "fas fa-home nav-link text-light" %>
+               </li>
+               <li class="nav-item">
+                <%= link_to "Users本当はUsersに飛ばす", books_path, class: "fas fa-users nav-link text-light" %>
+               </li>
+               <li class="nav-item">
+                <%= link_to "Books", books_path, class: "fas fa-book-open nav-link text-light" %>
+               </li>
+               <li class="nav-item">
+                <%= link_to "logout", destroy_user_session_path, method: :delete, class: "fas fa-sign-out-alt nav-link text-light" %>
+               </li>
+              <% else %>
+               <li class="nav-item active">
+                <%= link_to "Home", root_path, class: "fas fa-home nav-link text-light" %>
+               </li>
+               <li class="nav-item">
+                <%= link_to "About", home_about_path, class: "fas fa-link nav-link text-light" %>
+               </li>
+               <li class="nav-item">
+                <%= link_to "sign up", new_user_registration_path, class: "fas fa-user-plus nav-link text-light" %>
+               </li>
+               <li class="nav-item">
+                <%= link_to "login", new_user_session_path, class:"fa fa-sign-in-alt nav-link text-light" %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <p id="notice"></p>
+    </main>
     <%= yield %>
   </body>
 </html>
