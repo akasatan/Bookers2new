@@ -1,0 +1,46 @@
+<p id="notice"></p>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
+      <h2>User info</h2>
+      %= attachment_image_tag @user, :my_image, :fill, 100, 100, fallback: "no_image.jpg" %
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>name</th>
+            <th>%= @user.name %</th>
+          </tr>
+          <tr>
+            <th>introduction</th>
+            <th>%= @user.setsumei %</th>
+          </tr>
+        </tbody>
+      </table>
+      <%= link_to '', edit_user_path(@user), class: "btn btn-outline-secondary btn-block fas fa-user-cog" %>
+    </div>
+  </div>
+</div>
+<%= render 'users/newbook', new_book: @new_book %>
+    <div class="col-md-8 offset-md-1">
+        <h2>Books detail</h2>
+        <table class="table">
+          <body>
+            <tr>
+              <td>
+                <%= attachment_image_tag @user, :my_image, :fill, 100, 100, fallback: "no_image.jpg" %><br />
+                <%= @user.name %>
+              </td>
+              <td><%= @book.title %></td>
+              <td><%= @book.body %></td>
+                <% if @user == current_user %>
+              <td>
+                  <%= link_to "Edit", edit_book_path(@book), class: "btn btn-sm btn-success" %>
+              </td>
+              <td>
+                  <%= link_to "Destroy",  book_path(@book), method: :dalete, class: "btn btn-sm btn-danger" %>
+              </td>
+                <% end %>
+            </tr>
+          </tbody>
+        </table>
+    </div>

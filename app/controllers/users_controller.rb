@@ -1,32 +1,39 @@
 class UsersController < ApplicationController
 
   def index
+    @user = current_user
     @users = User.all
+    @new_book = Book.new
   end
+#current_userでUser(params[:id])と同じ意味になる
+#devise導入によるもの
 
   def create
-    @book = Book.new
-    @book = Book.new(kitei_params)
-    @book.save
-    redirect_to books_path
+    @user = current_user
+    @user.save
+    redirect_to user_path(current_user.id)
   end
 
   def update
+    @user = current_user
+    @user.update(user_params)
+    redirect_to user_path(current_user.id)
   end
 
   def edit
+    @user = current_user
   end
 
   def show
     @user = User.find(params[:id])
-    @user = User.all
+    @new_book = Book.new
     @books = Book.all
   end
 
   private
 
-  def kitei_params
-    params.require(:user).permit(:name, :setsumei, :my_image_id)
+  def user_params
+    params.require(:user).permit(:name, :setsumei, :my_image)
   end
 
 end
