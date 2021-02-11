@@ -16,3 +16,35 @@
 @import "bootstrap";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+
+*{
+  box-sizing: border-box;
+}
+p{
+  display: block;
+}
+.px-5, .px-5, .form{
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+.row{
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+tbody{
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+tr{
+  display: table-row;
+  vertial-align: inherit;
+  border-color: inherit;
+}
+th{
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
