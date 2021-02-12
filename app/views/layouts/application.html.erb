@@ -15,17 +15,15 @@
       <!--↑のなびばーがメニューを作る定義-->
       <!--fixed-topを付けて上部固定したいところ-->
           <a class="navbar-brand" href="/" ><!--brandはbrandロゴ-->
-            <span>Bookers</span>
+            <span class="m-5">Bookers</span>
           </a>
            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <!--ハンバーガーメニューの設置-->
-          <!--メニューのIDまで付ける必要ある？省略した方が見やすい？-->
             <span class="navbar-toggler-icon"></span>
-            <!--↑CSSにてハンバーガーメニューの画像定義する-->
           </button>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02" style>
           <!--buttonのaria-labelとdivのidと同じにする-->
-            <ul class="navber-nav ml auto">
+            <ul class="navber-nav m-auto">
               <% if user_signed_in? %>
                <li class="nav-item active">
                 <%= link_to "Home", user_path(current_user.id), class: "fas fa-home nav-link text-light" %>

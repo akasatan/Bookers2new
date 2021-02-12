@@ -1,23 +1,62 @@
 <div class="container px-5 px-sm-0">
-<%= render 'users/list', user: @user %>
-<%= render 'users/newbook', new_book: @new_book %>
+ <p id="notice"><%= notice %></p>
+ <div class="row">
+  <div class="col-md-3">
+      <h2>User info</h2>
+      <%= attachment_image_tag @book.user, :my_image, :fill, 50, 50, fallback: "no_image.jpg" %>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>name</th>
+            <th><%= @book.user.name %></th>
+          </tr>
+          <tr>
+            <th>introduction</th>
+            <th><%= @book.user.setsumei %></th>
+          </tr>
+        </tbody>
+      </table>
+      <% if @book.user_id == current_user.id %>
+        <%= link_to '', edit_user_path(current_user), class: "btn btn-outline-secondary btn-block fas fa-user-cog" %>
+      <% else %>
+        <%= link_to '', user_path(current_user), class: "btn btn-outline-secondary btn-block fas fa-user-cog" %>
+      <% end %>
+
+    <h2 class="mt-3">New book</h2>
+
+    <%= form_with model: @new_book, local:true do |f| %>
+      <div class="form-group">
+        <%= f.label :Title %>
+        <%= f.text_field :title %>
+      </div>
+      <div class="form-group">
+        <%= f.label :Opinion %>
+        <%= f.text_field :body %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Create Book", class: "btn btn-success" %>
+      </div>
+    <% end %>
+   </div>
+  </div>
+ </div>
     <div class="col-md-8 offset-md-1">
         <h2>Books detail</h2>
-        <table class="table">
+        <table class="table table hover table-inverse">
           <body>
             <tr>
               <td>
-                <%= attachment_image_tag @user, :my_image, :fill, 100, 100, fallback: "no_image.jpg" %><br />
-                <%= @user.name %>
+                <%= attachment_image_tag @book.user, :my_image, :fill, 40, 40, fallback: "no_image.jpg" %><br />
+                <%= @book.user.name %><!--@bookにはuser_idが入っているのでuser.nameで参照できる（？）-->
               </td>
-              <td><%= @new_book.title %></td>
-              <td><%= @new_book.body %></td>
-                <% if @user == current_user %>
+              <td><%= @book.title %></td>
+              <td><%= @book.body %></td>
+                <% if @book.user_id == current_user.id %>
               <td>
-                  %= link_to "Edit", edit_book_path(new_book), class: "btn btn-sm btn-success" %
+                  <%= link_to "Edit", edit_book_path(@book), class: "btn btn-sm btn-success" %>
               </td>
               <td>
-                  %= link_to "Destroy", books_path(new_book.id) , method: :dalete, class: "btn btn-sm btn-danger" %
+                  <%= link_to "Destroy", book_path(@book), method: :delete, data: {comfirm: "本当に消しますか？"}, class: "btn btn-sm btn-danger" %>
               </td>
                 <% end %>
             </tr>
@@ -25,3 +64,4 @@
         </table>
     </div>
 </div>
+<%= render 'users/copyright' %>

@@ -1,13 +1,6 @@
 <div class="container px-5 px-sm-0">
 <%= render 'users/list', user: @user %>
-   <div class="soroe">
-    <h2 class="mt-3">New book</h2>
-    <% if @new_book.errors.any? %>
-      <%= @new_book.errors.count %>件のエラーが発生しました
-      <% @new_book.errors.full_messages.each do |message| %>
-        <%= message %>
-      <% end %>
-    <% end %>
+    <h2>New book</h2>
     <%= form_with model: @new_book, local: true do |f| %>
       <div class="form-group">
         <%= f.label :Title %>
@@ -21,7 +14,6 @@
         <%= f.submit "Create Book", class: "btn btn-success" %>
       </div>
     <% end %>
-   </div>
     <div class="col-md-8 offset-md-1">
         <h2>Books</h2>
         <table class="table table-hover table-inverse">
@@ -36,16 +28,18 @@
           <tbody>
             <% @books.each do |book| %>
             <tr>
-              <td><%= attachment_image_tag @user, :my_image, :fill, 40, 40, fallback: "no_image.jpg" %></td>
-              <td><%= book.title %></td>
-              <td><%= book.setsumei %></td>
-             <% if @user.user == current_user %>
-              <td><%= link_to "Edit", edit_book_path(@book) %></td>
-              <td><%= link_to "Destroy", book_path(@book), method: :dalete %></td>
-             <% end %>
+              <td>
+                <%= link_to user_path(book.user.id) do %>
+                <%= attachment_image_tag @user, :my_image, :fill, 40, 40, fallback: "no_image.jpg" %>
+                <% end %>
+              </td>
+              <td><%= link_to book.title, book_path(book) %></td>
+              <!--(book)でuser_idを取り出せる。booksで定義してあるので普通の引数bookで飛べる-->
+              <td><%= book.body %></td>
             </tr>
             <% end %>
           </tbody>
         </table>
     </div>
 </div>
+<%= render 'users/copyright' %>

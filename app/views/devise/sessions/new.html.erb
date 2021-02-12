@@ -1,13 +1,14 @@
+<div class="m-5">
 <h2>Log in</h2>
-
+<%= alert %>error
 <%= form_with model: @user, url: user_session_path, local: true do |f| %>
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %><br />
+    <%= f.label :password %>
     <%= f.password_field :password, autocomplete: "current-password" %>
   </div>
 
@@ -24,3 +25,4 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>

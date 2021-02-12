@@ -23,34 +23,10 @@
 #notice{
   color: green;
 }
-p{
-  display: block;
-}
-.px-5, .px-5, .pl-5, soroe{
-  padding-left: 3rem;
-  padding-right: 3rem;
-}
+
 label{
   display: block;
 }
-.row{
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
-}
-tbody{
-  display: table-row-group;
-  vertical-align: middle;
-  border-color: inherit;
-}
-tr{
-  display: table-row;
-  vertial-align: inherit;
-  border-color: inherit;
-}
-th{
-  padding: 0.75rem;
-  vertical-align: top;
-  border-top: 1px solid #dee2e6;
+ul{
+  list-style: none;
 }

@@ -1,42 +1,35 @@
 class BooksController < ApplicationController
 
-  def new
-  end
-
   def index
     @books = Book.all
-    @users = User.all
     @new_book = Book.new
-    @user = current_user
+    @users = User.all
   end
 
   def create
-    @books = Book.all
-    @new_book = Book.new(book_params)
-    @user = current_user
-    if @new_book.save
-       redirect_to book_path(current_user.id), notice: "success book create."
-    else render :show
+    @new_book = Book.new(book_params) #新規投稿がここに来る
+    @new_book.user_id = current_user.id #自分なら保存する？
+    if   @new_book.save
+       redirect_to book_path(@new_book), notice: "success book create."
+    else render :index
     end
   end
-  #エラーだったらだめと表示してindexへ
-  #いいなら投稿してindexへにしたい。
 
   def edit
+    @book = Book.find(params[:id]) #押されたIDをもらってくる
   end
 
   def update
     @book = Book.find(params[:id])
-    @user = current_user
-    if @book.update
-       redirect_to book_path(current_user.id), notice: "success book update."
+    if @book.update(book_params)
+       redirect_to book_path(@book), notice: "success book update."
     else render :edit
     end
   end
 
   def show
-    @user = current_user
-    @new_book = Book.find(params[:user_id])
+    @new_book = Book.new
+    @book = Book.find(params[:id])
   end
 
   def destroy

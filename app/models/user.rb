@@ -10,4 +10,7 @@ class User < ApplicationRecord
   validates :name, length: { minimum: 2, maximum: 20 }
   validates :setsumei, length: { maximum: 50 }
 
+  validates :title, presence: true
+  validates :body, presence: true, length: { maximum: 200 }
+
 end

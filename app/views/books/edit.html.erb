@@ -1,7 +1,7 @@
    <div class="form">
     <h2 class="mt-3">Editing Book</h2>
     <% if @book.errors.any? %>
-      <%= @book.errors.count %>件のエラーが発生しました
+      <%= @book.errors.count %>件のerrorが発生しました
       <% @book.errors.full_messages.each do |message| %>
         <%= message %>
       <% end %>
@@ -22,3 +22,4 @@
     <p class="hov"><%= link_to "Show", book_path(@book) %> |
     <%= link_to "Back", books_path %></p>
    </div>
+   <%= render 'users/copyright' %>
