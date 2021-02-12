@@ -9,15 +9,20 @@ class UsersController < ApplicationController
 #devise導入によるもの
 
   def create
+    @user = User.new(user_params)
     @user = current_user
-    @user.save
-    redirect_to user_path(current_user.id)
+    if @user.save
+       redirect_to user_path(current_user.id), notice: "success book create."
+    else render :index
+    end
   end
 
   def update
     @user = current_user
-    @user.update(user_params)
-    redirect_to user_path(current_user.id)
+    if @user.update(user_params)
+      redirect_to user_path(current_user.id), notice: "success book update."
+    else render :edit
+    end
   end
 
   def edit

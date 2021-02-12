@@ -20,12 +20,18 @@
 *{
   box-sizing: border-box;
 }
+#notice{
+  color: green;
+}
 p{
   display: block;
 }
-.px-5, .px-5, .form{
+.px-5, .px-5, .pl-5, soroe{
   padding-left: 3rem;
   padding-right: 3rem;
+}
+label{
+  display: block;
 }
 .row{
   display: flex;
