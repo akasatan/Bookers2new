@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+  before_action :authenticate_user!
   def index
     @user = current_user
     @users = User.all
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user = current_user
     if @user.save
-       redirect_to user_path(current_user.id), notice: "success book create."
+       redirect_to user_path(current_user.id), notice: "You have created user successfully."
     else render :index
     end
   end
@@ -20,13 +20,16 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to user_path(current_user.id), notice: "success book update."
+      redirect_to user_path(current_user.id), notice: "You have updated user successfully."
     else render :edit
     end
   end
 
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
+    if @user == current_user
+    else redirect_to user_path(current_user)
+    end
   end
 
   def show
@@ -39,7 +42,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :setsumei, :my_image)
+    params.require(:user).permit(:name, :introduction, :profile_image)
   end
 
 end

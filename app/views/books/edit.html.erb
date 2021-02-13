@@ -1,25 +1,33 @@
-   <div class="form">
-    <h2 class="mt-3">Editing Book</h2>
-    <% if @book.errors.any? %>
-      <%= @book.errors.count %>件のerrorが発生しました
-      <% @book.errors.full_messages.each do |message| %>
-        <%= message %>
+<div class="container">
+  <div class="row">
+   <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+    <h2>Editing Book</h2>
+    <div class="error-m">
+      <% if @book.errors.any? %>
+        <%= @book.errors.count %>件のerrorが発生しました
+        <ul>
+          <% @book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
       <% end %>
-    <% end %>
+    </div>
     <%= form_with model:@book, local:true do |f| %>
-      <div class="form-group">
-        <%= f.label :title, 'Title' %>
-        <%= f.text_field :title %>
-      </div>
-      <div class="form-group">
-        <%= f.label :body, 'Opinion' %>
-        <%= f.text_field :body %>
-      </div>
-      <div class="form-group">
-        <%= f.submit "Create Book", class: "btn btn-success" %>
-      </div>
+    <div class="form-group">
+      <%= f.label :title, 'Title' %>
+      <%= f.text_field :title, class: "form-control title" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :body, 'Opinion' %>
+      <%= f.text_field :body, class: "form-control body" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit "Update Book", class: "btn btn-success" %>
+    </div>
     <% end %>
-    <p class="hov"><%= link_to "Show", book_path(@book) %> |
-    <%= link_to "Back", books_path %></p>
-   </div>
+    <%= link_to "Show", book_path(@book) %> |
+    <%= link_to "Back", books_path %>
+   </div><!--col-sm-12-->
+  </div><!--row-->
+</div><!--container-->
    <%= render 'users/copyright' %>

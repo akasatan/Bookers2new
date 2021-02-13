@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @books = Book.all
@@ -7,22 +8,26 @@ class BooksController < ApplicationController
   end
 
   def create
+    @books = Book.all
     @new_book = Book.new(book_params) #新規投稿がここに来る
     @new_book.user_id = current_user.id #自分なら保存する？
     if   @new_book.save
-       redirect_to book_path(@new_book), notice: "success book create."
+       redirect_to book_path(@new_book), notice: "You have created book successfully."
     else render :index
     end
   end
 
   def edit
     @book = Book.find(params[:id]) #押されたIDをもらってくる
+    if @book.user == current_user
+    else redirect_to books_path
+    end
   end
 
   def update
     @book = Book.find(params[:id])
     if @book.update(book_params)
-       redirect_to book_path(@book), notice: "success book update."
+       redirect_to book_path(@book), notice: "You have updated book successfully."
     else render :edit
     end
   end
@@ -34,8 +39,10 @@ class BooksController < ApplicationController
 
   def destroy
     @book = Book.find(params[:id])
-    @book.destroy
+    if @book.destroy
     redirect_to books_path
+    else render :index
+    end
   end
 
   private

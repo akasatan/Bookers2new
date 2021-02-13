@@ -1,28 +1,23 @@
-    <% if @new_book.errors.any? %>
-      <%= @new_book.errors.count %>件のerrorが発生しました
-      <% @new_book.errors.full_messages.each do |message| %>
-        <%= message %>
-      <% end %>
-    <% end %>
+<p id="notice"><%= notice %></p>
 <div class="container px-5 px-sm-0">
-<%= render 'users/list', user: current_user %>
-    <h2 class="mt-3">New book</h2>
-    <%= form_with model: @new_book, local: true do |f| %>
-      <div class="form-group">
-        <%= f.label :Title %>
-        <%= f.text_field :title %>
-      </div>
-      <div class="form-group">
-        <%= f.label :Opinion %>
-        <%= f.text_field :body %>
-      </div>
-      <div class="form-group">
-        <%= f.submit "Create Book", class: "btn btn-success" %>
-      </div>
+  <div class="error-m">
+    <% if @new_book.errors.any? %>
+      <h2><%= @new_book.errors.count %>errors prohibited this obj from being saved:</h2>
+      <ul>
+      <% @new_book.errors.full_messages.each do |message| %>
+         <li><%= message %></li>
+      <% end %>
+      </ul>
     <% end %>
-   </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+     <%= render 'users/list', user: current_user %>
+     <%= render 'users/newbook', new_book: @new_book %>
+    </div><!--col-md-3-->
     <div class="col-md-8 offset-md-1">
-        <h2>Books</h2>
+      <h2>Books</h2>
         <table class="table table-hover table-inverse">
           <thead>
             <tr>
@@ -34,15 +29,19 @@
           </thead>
           <tbody>
             <% @books.each do |book| %>
-            <tr>
-              <td><%= attachment_image_tag book.user, :my_image, :fill, 40, 40, fallback: "no_image.jpg" %></td>
-              <!--bookにuser_idが入っているのでbook.userが成り立つ（？）-->
-              <td><%= link_to book.title, book_path(book) %></td>
-              <td><%= book.body %></td>
-            </tr>
+              <tr>
+                <td>
+                  <%= link_to user_path(book.user.id) do %>
+                    <%= attachment_image_tag book.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size:'40x40' %></td>
+                    <!--bookにuser_idが入っているのでbook.userが成り立つ（？）-->
+                  <% end %>
+                <td><%= link_to book.title, book_path(book) %></td>
+                <td><%= book.body %></td>
+              </tr>
             <% end %>
           </tbody>
         </table>
-    </div>
-</div>
+    </div><!--col-md-8-->
+  </div><!--row-->
+</div><!--container-->
 <%= render 'users/copyright' %>

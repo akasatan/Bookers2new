@@ -23,10 +23,14 @@
 #notice{
   color: green;
 }
-
 label{
   display: block;
 }
-ul{
+
+.var{
   list-style: none;
+}
+
+#error_explanation, .error-m{
+  color: red;
 }
