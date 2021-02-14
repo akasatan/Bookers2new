@@ -33,11 +33,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id]) #ユーザ情報の取得
-    @new_book = Book.new #新規投稿の箱用意
-    @books = @user.books #そのユーザの本持って来るインスタンスメゾット
+    @user = User.find(params[:id])
+    @new_book = Book.new
+    @books = @user.books
   end
-  #最初ログインしたユーザの所に行く。次から、新しく箱を作る、その人の本を参照する。
+  
 
   private
 

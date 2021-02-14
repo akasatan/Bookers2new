@@ -9,8 +9,8 @@ class BooksController < ApplicationController
 
   def create
     @books = Book.all
-    @new_book = Book.new(book_params) #新規投稿がここに来る
-    @new_book.user_id = current_user.id #自分なら保存する？
+    @new_book = Book.new(book_params)
+    @new_book.user_id = current_user.id
     if   @new_book.save
        redirect_to book_path(@new_book), notice: "You have created book successfully."
     else render :index
@@ -18,7 +18,7 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @book = Book.find(params[:id]) #押されたIDをもらってくる
+    @book = Book.find(params[:id])
     if @book.user == current_user
     else redirect_to books_path
     end
@@ -49,6 +49,5 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:title, :body)
   end
-  #createが実行されるとbookテーブルのタイトルボディーが参照される。
 
 end

@@ -16,7 +16,6 @@
                   <%= attachment_image_tag @book.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size:'40x40' %><br />
                 <% end %>
                 <%= link_to @book.user.name, user_path(@book.user.id) %>
-                <!--@bookにはbookのidが入っているのでuserのnameで名前が手に入る（？）-->
               </td>
               <td><%= link_to @book.title, book_path(@book) %></td>
               <td><%= @book.body %></td>

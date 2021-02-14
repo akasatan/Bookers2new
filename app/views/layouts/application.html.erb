@@ -11,22 +11,21 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expend-lg navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
       <!--↑のなびばーがメニューを作る定義-->
       <!--fixed-topを付けて上部固定したいところ-->
           <a class="navbar-brand" href="/" ><!--brandはbrandロゴ-->
             <span class="m-5">Bookers</span>
           </a>
-           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavbarDropdown" aria-controls="navbarNavbarDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <!--ハンバーガーメニューの設置-->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNavbarDropdown" style>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <!--buttonのaria-labelとdivのidと同じにする-->
-            <ul class="navber-nav ml-auto var">
+            <ul class="navbar-nav ml-auto var">
               <% if user_signed_in? %>
-               <li class="nav-item active">
+               <li class="nav-item">
                 <%= link_to "Home", user_path(current_user.id), class: "fas fa-home nav-link text-light" %>
                </li>
                <li class="nav-item">
@@ -39,7 +38,7 @@
                 <%= link_to "logout", destroy_user_session_path, method: :delete, class: "fas fa-sign-out-alt nav-link text-light" %>
                </li>
               <% else %>
-               <li class="nav-item active">
+               <li class="nav-item">
                 <%= link_to "Home", root_path, class: "fas fa-home nav-link text-light" %>
                </li>
                <li class="nav-item">
